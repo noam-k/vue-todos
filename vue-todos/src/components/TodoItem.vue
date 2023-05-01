@@ -33,7 +33,13 @@
                 class="icon"
                 @click="$emit('edit-todo', index)"
             />
-            <Icon icon="ph:trash" color="#f95e5e" width="22" class="icon"/>
+            <Icon
+                icon="ph:trash"
+                color="#f95e5e"
+                width="22"
+                class="icon"
+                @click="$emit('delete-todo', todo.id)"
+            />
         </div>
     </li>
 </template>
@@ -50,7 +56,7 @@ import { Icon } from '@iconify/vue';
             required: true,
         }
     });
-    defineEmits(["toggle-complete", "edit-todo", "update-todo"])
+    defineEmits(["toggle-complete", "edit-todo", "update-todo", "delete-todo"])
 </script>
 
 <style lang="scss" scoped>

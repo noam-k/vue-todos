@@ -27,6 +27,10 @@
   const updateTodo = (updatedValue, index) => {
     todoList.value[index].todo = updatedValue;
   }
+
+  const deleteTodo = (todoId) => {
+    todoList.value = todoList.value.filter((todo) => todo.id !== todoId)
+  }
 </script>
 
 <template>
@@ -41,6 +45,7 @@
         @toggle-complete="toggleTodoComplete"
         @edit-todo="toggleEditTodo"
         @update-todo="updateTodo"
+        @delete-todo="deleteTodo"
       />
     </ul>
     <p v-else class="todos-msg">
