@@ -7,29 +7,48 @@
 
   const todoList = ref([]);
 
+  const fetchTodoList = () => {
+    const savedTodoList = JSON.parse(localStorage.getItem("todoList"));
+    if (savedTodoList) {
+      todoList.value = savedTodoList;
+    }
+  }
+
+  fetchTodoList();
+
+  const setTodoListLocalStorage = () => {
+    localStorage.setItem("todoList", JSON.stringify(todoList.value));
+  }
+
   const createTodo = (todo) => {
+    console.log(todoList.length);
     todoList.value.push({
       id: uid(),
       todo,
       isCompleted: null,
       isEditing: null,
-    })
+    });
+    setTodoListLocalStorage();
   }
 
   const toggleTodoComplete = (index) => {
     todoList.value[index].isCompleted = !todoList.value[index].isCompleted;
+    setTodoListLocalStorage();
   }
 
   const toggleEditTodo = (index) => {
     todoList.value[index].isEditing = !todoList.value[index].isEditing;
+    setTodoListLocalStorage();
   }
 
   const updateTodo = (updatedValue, index) => {
     todoList.value[index].todo = updatedValue;
+    setTodoListLocalStorage();
   }
 
   const deleteTodo = (todoId) => {
-    todoList.value = todoList.value.filter((todo) => todo.id !== todoId)
+    todoList.value = todoList.value.filter((todo) => todo.id !== todoId);
+    setTodoListLocalStorage();
   }
 </script>
 
