@@ -1,11 +1,19 @@
 <script setup>
   import TodoCreator from "../components/TodoCreator.vue";
   import { uid } from "uid";
-  import { ref } from "vue"; 
+  import { ref, watch, computed } from "vue"; 
   import TodoItem from "../components/TodoItem.vue";
   import { Icon } from "@iconify/vue";
 
   const todoList = ref([]);
+
+  watch(todoList, () => {
+    setTodoListLocalStorage();
+  }, {deep: true})
+
+  const todoCompleted = computed(() => {
+    return todoList.value.every((todo) => todo.isCompleted);
+  })
 
   const fetchTodoList = () => {
     const savedTodoList = JSON.parse(localStorage.getItem("todoList"));
@@ -28,27 +36,22 @@
       isCompleted: null,
       isEditing: null,
     });
-    setTodoListLocalStorage();
   }
 
   const toggleTodoComplete = (index) => {
     todoList.value[index].isCompleted = !todoList.value[index].isCompleted;
-    setTodoListLocalStorage();
   }
 
   const toggleEditTodo = (index) => {
     todoList.value[index].isEditing = !todoList.value[index].isEditing;
-    setTodoListLocalStorage();
   }
 
   const updateTodo = (updatedValue, index) => {
     todoList.value[index].todo = updatedValue;
-    setTodoListLocalStorage();
   }
 
   const deleteTodo = (todoId) => {
     todoList.value = todoList.value.filter((todo) => todo.id !== todoId);
-    setTodoListLocalStorage();
   }
 </script>
 
@@ -69,7 +72,11 @@
     </ul>
     <p v-else class="todos-msg">
       <Icon icon="noto:relieved-face" width="22"/>
-      <span>Congratulations, no tasks to complete</span>
+      <span>Looks like there are no tasks to complete. Go ahead and create one.</span>
+    </p>
+    <p v-if="todoCompleted && todoList.length > 0" class="todos-msg">
+      <Icon icon="noto:party-popper" />
+      <span>All tasks are completed!</span>
     </p>
   </main>
 </template>
