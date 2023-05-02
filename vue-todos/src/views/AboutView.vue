@@ -1,7 +1,6 @@
 <template>
   <div class="about">
     <h1>Todo App using VueJS</h1>
-  </div>
   <p>
     Hi, my name is Noam Kritenberg and I built this application in order to 
     learn the basics of VueJS.
@@ -11,14 +10,15 @@
      Komarnicki </a> for creating lots of VueJS content, I learned a lot from
      his content.
   </p> 
+</div>
 </template>
 
 <style>
 @media (min-width: 1024px) {
   .about {
     min-height: 100vh;
-    display: flex;
     align-items: center;
+    text-align: center;
   }
 }
 h1, p {
