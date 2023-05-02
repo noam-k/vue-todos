@@ -29,7 +29,7 @@
   }
 
   const createTodo = (todo) => {
-    console.log(todoList.length);
+    console.log(todoList.value.length);
     todoList.value.push({
       id: uid(),
       todo,

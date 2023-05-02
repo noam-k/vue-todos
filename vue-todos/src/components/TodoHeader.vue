@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 </script>
+
 <template>
     <header>
         <nav class="container">
@@ -15,6 +16,7 @@ import { RouterLink } from 'vue-router';
         </nav>
     </header>
 </template>
+
 <style lang="scss" scoped>
 header {
   background-color: #f1f1f1;
